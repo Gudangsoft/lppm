@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Models;
+
+use App\Traits\Translatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class ResearchScheme extends Model
+{
+    use Translatable;
+
+    protected $fillable = ['slug', 'code', 'is_active', 'order'];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
+    protected $translatable = ['name', 'description', 'requirements'];
+
+    public function researches(): HasMany
+    {
+        return $this->hasMany(Research::class, 'scheme_id');
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+}

@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Setting extends Model
+{
+    protected $fillable = [
+        'key', 'value', 'type', 'group', 'label', 'options', 'order'
+    ];
+
+    protected $casts = [
+        'options' => 'array',
+    ];
+
+    public static function get($key, $default = null)
+    {
+        $setting = static::where('key', $key)->first();
+        return $setting ? $setting->value : $default;
+    }
+
+    public static function set($key, $value)
+    {
+        return static::updateOrCreate(['key' => $key], ['value' => $value]);
+    }
+
+    public static function getGroup($group)
+    {
+        return static::where('group', $group)->orderBy('order')->get();
+    }
+}
