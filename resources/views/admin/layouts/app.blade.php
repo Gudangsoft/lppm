@@ -161,6 +161,13 @@
                     Bahasa
                 </a>
                 
+                @if(Auth::user()->hasRole('super-admin'))
+                <a href="{{ route('admin.backup.index') }}" class="flex items-center px-4 py-2.5 text-sm rounded-lg {{ request()->routeIs('admin.backup.*') ? 'bg-primary-600 text-white' : 'text-gray-300 hover:bg-gray-800' }}">
+                    <i class="fas fa-database w-5 mr-3"></i>
+                    Backup Database
+                </a>
+                @endif
+                
                 <a href="{{ route('admin.settings.index') }}" class="flex items-center px-4 py-2.5 text-sm rounded-lg {{ request()->routeIs('admin.settings.*') ? 'bg-primary-600 text-white' : 'text-gray-300 hover:bg-gray-800' }}">
                     <i class="fas fa-cog w-5 mr-3"></i>
                     Pengaturan

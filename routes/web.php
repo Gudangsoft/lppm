@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\InternalGrantController;
 use App\Http\Controllers\Admin\InternalGrantProgressReportController;
 use App\Http\Controllers\Admin\InternalGrantFinalReportController;
 use App\Http\Controllers\Admin\InternalGrantReportController;
+use App\Http\Controllers\Admin\BackupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -205,5 +206,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:super-admin|ad
             Route::get('/researcher-performance', [InternalGrantReportController::class, 'researcherPerformance'])->name('researcher-performance');
             Route::get('/export', [InternalGrantReportController::class, 'export'])->name('export');
         });
+    });
+
+    // Database Backup
+    Route::prefix('backup')->name('backup.')->middleware('role:super-admin')->group(function () {
+        Route::get('/', [BackupController::class, 'index'])->name('index');
+        Route::post('/create', [BackupController::class, 'create'])->name('create');
+        Route::get('/download/{filename}', [BackupController::class, 'download'])->name('download');
+        Route::delete('/{filename}', [BackupController::class, 'destroy'])->name('destroy');
     });
 });
