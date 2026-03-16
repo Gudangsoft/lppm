@@ -79,7 +79,7 @@
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Urutan</label>
-                        <input type="number" name="sort_order" value="{{ old('sort_order', $page->sort_order ?? 0) }}" class="w-full rounded-lg border-gray-300 focus:border-primary-500 focus:ring-primary-500">
+                        <input type="number" name="order" value="{{ old('order', $page->order ?? 0) }}" class="w-full rounded-lg border-gray-300 focus:border-primary-500 focus:ring-primary-500">
                     </div>
                     
                     <div class="flex items-center">

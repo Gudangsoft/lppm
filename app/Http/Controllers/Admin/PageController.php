@@ -22,7 +22,7 @@ class PageController extends Controller
             });
         }
 
-        $pages = $query->orderBy('sort_order')->paginate(15)->onEachSide(2);
+        $pages = $query->orderBy('order')->paginate(15)->onEachSide(2);
 
         return view('admin.pages.index', compact('pages'));
     }
@@ -45,7 +45,7 @@ class PageController extends Controller
             'slug' => Str::slug($request->slug),
             'template' => $request->template ?? 'default',
             'is_published' => $request->boolean('is_published'),
-            'sort_order' => $request->sort_order ?? 0,
+            'order' => $request->sort_order ?? $request->order ?? 0,
             'created_by' => auth()->id(),
         ]);
 
