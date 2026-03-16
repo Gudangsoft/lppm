@@ -75,7 +75,7 @@ class FrontendController extends Controller
         $relatedPages = Page::where('id', '!=', $page->id)
             ->where('is_published', true)
             ->with('translations')
-            ->orderBy('sort_order')
+            ->orderBy('order')
             ->take(10)
             ->get();
             
